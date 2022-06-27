@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: install toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        target: wasm32-unknown-unknown
+        override: true
+        profile: minimal
+    - name: Run Clippy
+      run: cargo clippy
+    - name: Check Formating
+      run: cargo fmt --all -- --check
+    - name: Run tests
+      run: cargo test --verbose
