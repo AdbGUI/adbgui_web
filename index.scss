@@ -1,35 +1,134 @@
 html,
 body {
-  height: 100%;
-  margin: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  align-items: center;
-  display: flex;
-  justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 
-  background: linear-gradient(to bottom right, #444444, #009a5b);
-  font-size: 1.5rem;
+    background: #FAFAFA;
+    font-size: 1.5rem;
 }
 
 main {
-  color: #fff6d5;
-  font-family: sans-serif;
-  text-align: center;
+    color: #FAFAFA;
+    display: flex;
+    font-family: montserrat;
+    height: 100%;
+    width: 100vw;
+}
+.main_content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
 }
 
-.logo {
-  height: 20em;
+.error {
+    color: #ff6767;
+}
+.warning {
+    color: #ffac42;
+}
+.info {
+    color: #678eff;
 }
 
-.heart:after {
-  content: "❤️";
-
-  font-size: 1.75em;
+.logcat_message {
+    font-size: 1.2rem;
+    color: #333333;
 }
 
-h1 + .subtitle {
-  display: block;
-  margin-top: -1em;
+.message {
+    font-size: 1.2rem;
+    &:after { content: ': '; }
+}
+
+.message_content {
+    color: #333333;
+}
+
+///
+/// Components
+///
+.sidebar {
+    display: flex;
+    height: 100%;
+    width: 5rem;
+    background-color: #7197BA;
+    box-shadow: 0 0 35 0 rgba(0, 0, 0, 0.26);
+    align-items: center;
+    justify-content: center;
+
+    &_button:hover {
+        cursor: pointer;
+    }
+}
+
+//
+// Wave Effect
+//
+.circle_android {
+    display: flex;
+    width: 15rem;
+    margin: 5rem auto;
+    height: 15rem;
+    border-radius: 50%;
+    background: #0194c7;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+
+    .delay1 {
+        animation: waves 2.5s infinite;
+        animation-delay: .1s;
+    }
+
+    .delay2 {
+        animation: waves 2.5s infinite .7s forwards,
+    }
+
+    .delay3 {
+        animation: waves 2.5s infinite 1.3s forwards;
+    }
+
+    .delay4 {
+        animation: waves 2.5s infinite 1.9s forwards;
+    }
+
+    svg, span {
+        z-index: 1;
+    }
+
+    span {
+        margin-top: 20px;
+    }
+}
+
+.wave {
+    display: block;
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+    background: #0194c7;
+    transition: 5s ease;
+    position: absolute;
+    z-index: 0;
+}
+
+@keyframes waves {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
