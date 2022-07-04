@@ -1,9 +1,33 @@
+#![allow(dead_code)]
+
 use web_sys::HtmlElement;
 use yew::prelude::*;
 use yew_hooks::prelude::*;
 
-#[function_component(RezisableContainer)]
-pub fn rezisable_container() -> Html {
+#[derive(Debug, PartialEq)]
+pub enum AdjustableContainerDirection {
+    Horizontal,
+    Vertical,
+    Both
+}
+
+#[derive(Default, Debug, PartialEq, Properties)]
+pub struct AdjustableContainerProps {
+    #[prop_or_default]
+    pub children: Children,
+    pub direction: AdjustableContainerDirection,
+}
+
+impl Default for AdjustableContainerDirection {
+    fn default() -> Self {
+        AdjustableContainerDirection::Vertical
+    }
+}
+
+#[function_component(AdjustableContainer)]
+pub fn adjustable_container(props: &AdjustableContainerProps) -> Html {
+    let AdjustableContainerProps { direction: _, children } = &props;
+
     let can_drag = use_state(|| false);
     let drag = use_state(|| 0);
 
@@ -48,6 +72,7 @@ pub fn rezisable_container() -> Html {
     html! {
         <div ref={container_ref} class="logcat_container">
             <div class="resizer" {onmousedown} />
+            {for children.iter()}
         </div>
     }
 }
