@@ -1,9 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 html,
 body {
     width: 100vw;
     height: 100vh;
-    margin: 0;
-    padding: 0;
 }
 
 body {
@@ -23,8 +26,10 @@ main {
     width: 100vw;
 }
 .main_content {
+    align-items: center;
     display: flex;
-    justify-content: center;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
     width: 100%;
     height: 100vh;
 }
@@ -53,6 +58,15 @@ main {
     color: #333333;
 }
 
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 ///
 /// Components
 ///
@@ -61,12 +75,33 @@ main {
     height: 100%;
     width: 5rem;
     background-color: #7197BA;
-    box-shadow: 0 0 35 0 rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.26);
     align-items: center;
     justify-content: center;
+    z-index: 2;
 
     &_button:hover {
         cursor: pointer;
+    }
+}
+
+.logcat_container {
+    background-color: #ccc;
+    display: flex;
+    position: absolute;
+    width: calc(100vw - 4.5rem);
+    height: 30%;
+    z-index: 1;
+    bottom: 0;
+
+    .resizer {
+        width: 100%;
+        height: 5px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, .2);
+            cursor: ns-resize;
+        }
     }
 }
 
@@ -76,7 +111,6 @@ main {
 .circle_android {
     display: flex;
     width: 15rem;
-    margin: 5rem auto;
     height: 15rem;
     border-radius: 50%;
     background: #0194c7;
@@ -101,12 +135,30 @@ main {
         animation: waves 2.5s infinite 1.9s forwards;
     }
 
-    svg, span {
+    img {
+        width: 6em;
+        height: 6em;
+    }
+
+    img, svg, span {
         z-index: 1;
     }
 
     span {
-        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+
+    .message {
+        color: #333333;
+        display: block;
+        font-variant: small-caps;
+        font-weight: 400;
+        margin-top: 22rem;
+        position: absolute;
+
+        &:after {
+            content: '';
+        }
     }
 }
 

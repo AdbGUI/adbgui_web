@@ -1,7 +1,7 @@
 use yew::prelude::*;
 
 use yew_icons::{Icon, IconId};
-use crate::components::sidebar::{Sidebar, SidebarBtnProps};
+use crate::components::{sidebar::{Sidebar, SidebarBtnProps}, logcat_shell::LogcatShell};
 
 #[function_component(App)]
 pub fn app() -> Html {
@@ -22,9 +22,12 @@ pub fn app() -> Html {
                     <div class="wave delay1"></div>
                     <div class="wave delay2"></div>
                     <div class="wave delay3"></div>
-                    <Icon icon_id={IconId::FeatherHome} width={"5.3em".to_owned()} height={"5.3em".to_owned()} />     <div class="wave delay4"></div>
-                    <span>{"6.2.7"}</span>
+                    <div class="wave delay4"></div>
+                    <img alt="APK icon" src="assets/icons/android.svg"/>
+                    <span class="unselectable">{"6.2.7"}</span>
+                    <span class="message unselectable">{"Arrastra aqui un APK para configurar una nueva version"}</span>
                 </div>
+                <LogcatShell />
             </div>
         </main>
     }
