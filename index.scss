@@ -25,6 +25,9 @@ main {
     height: 100%;
     width: 100vw;
 }
+
+.hidden { display: none !important; }
+
 .main_content {
     align-items: center;
     display: flex;
@@ -88,9 +91,10 @@ main {
 .logcat_container {
     background-color: #ccc;
     display: flex;
+    flex-flow: column nowrap;
     position: absolute;
     width: calc(100vw - 4.5rem);
-    height: 30%;
+    height: 60%;
     z-index: 1;
     bottom: 0;
 
@@ -103,6 +107,46 @@ main {
             cursor: ns-resize;
         }
     }
+
+    .connecting_container {
+        align-items: center;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container_messages {
+        display: flex;
+        flex-flow: column nowrap;
+        height: 100%;
+        padding: 10px 20px;
+        overflow: hidden;
+    }
+}
+
+.loader{
+    font-size: 48px;
+    color: #FFF;
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    position: relative;
+}
+.loader:before{
+    content: '';
+    animation: 5s print linear alternate infinite;
+}
+.loader:after{
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translatey(-45%);
+    width: 6px;
+    height: 1.3em;
+    background: #FFF;
+    opacity: 0.8;
+    animation: 1s blink steps(2) infinite;
 }
 
 //
@@ -183,4 +227,21 @@ main {
         transform: scale(4);
         opacity: 0;
     }
+}
+
+@keyframes blink {
+    0%  { visibility: hidden;}
+    100%  { visibility: visible;}
+}
+@keyframes print {
+    0% { content: 'L'}
+    10% { content: 'Lo'}
+    20% { content: 'Loa'}
+    30% { content: 'Load'}
+    40% { content: 'Loadi'}
+    50% { content: 'Loadin'}
+    60% { content: 'Loading'}
+    70% { content: 'Loading.'}
+    80% { content: 'Loading..'}
+    90% , 100% { content: 'Loading...'}
 }
