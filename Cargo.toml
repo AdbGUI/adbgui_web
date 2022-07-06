@@ -1,5 +1,5 @@
 [package]
-name = "trunk-template"
+name = "adbgui"
 version = "0.1.0"
 edition = "2021"
 description = "Template for starting a Yew project using Trunk"
@@ -23,12 +23,11 @@ yew-router = "0.16"
 yew_icons = { version = "0.4.1", features = ["FeatherHome"]}
 
 wasm-bindgen = "0.2.45"
-wasm-logger = "0.2"
+reqwasm = "0.4.0"
 
-wee_alloc = { version = "0.4.2", optional = true }
+thiserror = "1.0"
 log = "0.4.6"
-reqwasm = "0.4"
-web-sys = { version = "0.3.55", features = [ "CssStyleDeclaration", "HtmlElement" ]}
+web-sys = { version = "0.3.55", features = [ "console", "CssStyleDeclaration", "HtmlElement" ]}
 futures = "0.3.17"
 wasm-bindgen-futures = "0.4.28"
 serde_json = "1.0.73"

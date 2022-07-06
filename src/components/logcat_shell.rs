@@ -1,10 +1,9 @@
+use crate::api::get_ws;
 use crate::components::atomic::adjustable_container::{
     AdjustableContainer, AdjustableContainerDirection,
 };
 use yew::prelude::*;
-use yew_hooks::{
-    use_list, use_web_socket_with_options, UseWebSocketOptions,
-};
+use yew_hooks::{use_list, use_web_socket_with_options, UseWebSocketOptions};
 
 use super::atomic::message::{Message, MessageProps};
 
@@ -15,10 +14,11 @@ pub fn logcat_shell() -> Html {
     {
         let messages = messages.clone();
         use_web_socket_with_options(
-            "ws://0.0.0.0:8080/api/logcat".to_string(),
+            get_ws(),
             UseWebSocketOptions {
                 onmessage: Some(Box::new(move |message| {
-                    let msg = serde_json::from_str::<MessageProps>(message.as_str()).unwrap_or_default();
+                    let msg =
+                        serde_json::from_str::<MessageProps>(message.as_str()).unwrap_or_default();
                     messages.push(msg);
                 })),
                 ..Default::default()
