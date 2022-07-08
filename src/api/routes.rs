@@ -4,8 +4,8 @@ use web_sys::File;
 
 use crate::api::error::Error;
 
-const API_LOGCAT: &'static str = "api/logcat";
-const API_APK: &'static str = "api/apk";
+const API_LOGCAT: &str = "api/logcat";
+const API_APK: &str = "api/apk";
 
 pub fn get_protocol() -> String {
     let protocol = match std::env::var("USE_SSL") {

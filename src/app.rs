@@ -24,13 +24,13 @@ pub fn app() -> Html {
         html! {<Icon icon_id={IconId::FeatherHome} width={"1.3em".to_owned()} height={"1.3em".to_owned()} />},
     ]);
     options.push(SidebarBtnProps {
-        icon: c.clone(),
+        icon: c,
         name: "Home".to_string(),
         on_click: Callback::from(|_| println!("Click Home")),
     });
 
     // Drop apk
-    let apk_state = use_state(|| ApkDropState::default());
+    let apk_state = use_state(ApkDropState::default);
     let node = use_node_ref();
     let upload = {
         let apk_state = apk_state.clone();
@@ -41,7 +41,7 @@ pub fn app() -> Html {
         let apk_state = apk_state.clone();
         let over_state = apk_state.clone();
         let leave_state = apk_state.clone();
-        let upload = upload.clone();
+        let upload = upload;
 
         use_drop_with_options(
             node.clone(),
@@ -64,12 +64,12 @@ pub fn app() -> Html {
                 })),
                 onfiles: Some(Box::new(move |files, _data_transfer| {
                     // Process files or data_transfer
-                    if let Some(apk) = files.iter().filter(|f| f.name().ends_with("apk")).next() {
+                    if let Some(apk) = files.iter().find(|f| f.name().ends_with("apk")) {
                         apk_state.set(ApkDropState {
                             show_drop_modal: false,
                             uploading: true,
                             apk: Some(apk.clone()),
-                            apk_name: apk.name().clone(),
+                            apk_name: apk.name(),
                         });
                         upload.run();
                     } else {

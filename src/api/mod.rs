@@ -1,4 +1,4 @@
-pub mod api;
 pub mod error;
+pub mod routes;
 
-pub use api::*;
+pub use routes::*;

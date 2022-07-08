@@ -64,7 +64,6 @@ pub fn adjustable_container(props: &AdjustableContainerProps) -> Html {
     }
 
     {
-        let can_drag = can_drag.clone();
         use_event_with_window("mouseup", move |_e: MouseEvent| {
             if *can_drag {
                 let document = web_sys::window().unwrap().document().unwrap();
