@@ -9,29 +9,29 @@ check="$green$check_char$nc"
 error="$red$cross_char$nc"
 
 
-echo -n "Checking formatting... "
+echo -e -n "Checking formatting...\n"
 cargo fmt --all -- --check &>/dev/null
 if [[ $? -ne 0 ]]; then
-    echo -n "$error Bad formatting"
+    echo -e -n "$error Bad formatting\n"
     exit 1
 else
-    echo -n "$check Nice formatting"
+    echo -e -n "$check Nice formatting\n"
 fi
 
-echo -n "Checking code... "
+echo -e -n "Checking code...\n"
 cargo clippy
 if [[ $? -ne 0 ]]; then
-    echo -n "$error Bad code"
+    echo -e -n "$error Bad code\n"
     exit 1
 else
-    echo -n "$check Nice code"
+    echo -e -n "$check Nice code\n"
 fi
 
-echo -n "Running tests... "
+echo -e -n "Running tests... \n"
 cargo test --color always
 if [[ $? -ne 0 ]]; then
-    echo -n "$error Test failed"
+    echo -e -n "$error Test failed\n"
     exit 1
 else
-    echo -n "$check Nice tests"
+    echo -e -n "$check Nice tests\n"
 fi
