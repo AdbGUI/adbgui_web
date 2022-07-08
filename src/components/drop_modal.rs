@@ -1,6 +1,6 @@
 use yew::prelude::*;
 
-#[derive(PartialEq, Debug, Properties)]
+#[derive(PartialEq, Eq, Debug, Properties)]
 pub struct DropModalProps {
     pub uploading: bool,
 }

@@ -2,7 +2,7 @@ use crate::models::message::TypeMessage;
 use serde::{Deserialize, Serialize};
 use yew::{function_component, html, Classes, Properties};
 
-#[derive(Debug, Default, Serialize, Deserialize, Clone, PartialEq, Properties)]
+#[derive(Debug, Default, Serialize, Deserialize, Clone, PartialEq, Eq, Properties)]
 pub struct MessageProps {
     pub type_message: TypeMessage,
     pub content: String,

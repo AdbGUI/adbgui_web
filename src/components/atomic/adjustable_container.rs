@@ -4,7 +4,7 @@ use web_sys::HtmlElement;
 use yew::prelude::*;
 use yew_hooks::prelude::*;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum AdjustableContainerDirection {
     Horizontal,
     Vertical,
