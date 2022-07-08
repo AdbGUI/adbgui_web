@@ -1,0 +1,37 @@
+#!/bin/sh
+
+check_char='\xE2\x9C\x93'
+cross_char='\xE2\x9D\x8C'
+green='\033[0;32m'
+red='\033[031m'
+nc='\033[0m'
+check="$green$check_char$nc"
+error="$red$cross_char$nc"
+
+
+echo -n "Checking formatting... "
+cargo fmt --all -- --check &>/dev/null
+if [[ $? -ne 0 ]]; then
+    echo -n "$error Bad formatting"
+    exit 1
+else
+    echo -n "$check Nice formatting"
+fi
+
+echo -n "Checking code... "
+cargo clippy
+if [[ $? -ne 0 ]]; then
+    echo -n "$error Bad code"
+    exit 1
+else
+    echo -n "$check Nice code"
+fi
+
+echo -n "Running tests... "
+cargo test --color always
+if [[ $? -ne 0 ]]; then
+    echo -n "$error Test failed"
+    exit 1
+else
+    echo -n "$check Nice tests"
+fi
