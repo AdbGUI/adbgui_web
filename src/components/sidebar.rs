@@ -14,9 +14,13 @@ pub struct SidebarProps {
 
 #[function_component(ButtonSidebar)]
 pub fn sidebar_btn(props: &SidebarBtnProps) -> Html {
-    let SidebarBtnProps { icon, name: _, on_click: onclick } = &props;
+    let SidebarBtnProps {
+        icon,
+        name: _,
+        on_click: onclick,
+    } = &props;
 
-    html!{
+    html! {
         <div class="sidebar_button" {onclick}> {icon.clone()} </div>
     }
 }

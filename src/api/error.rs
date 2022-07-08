@@ -21,4 +21,3 @@ pub enum Error {
     #[error("Invalid session id")]
     InvalidSession(#[from] ParseIntError),
 }
-

@@ -1,6 +1,6 @@
 use crate::models::message::TypeMessage;
-use serde::{Serialize, Deserialize};
-use yew::{function_component, html, Properties, Classes};
+use serde::{Deserialize, Serialize};
+use yew::{function_component, html, Classes, Properties};
 
 #[derive(Debug, Default, Serialize, Deserialize, Clone, PartialEq, Properties)]
 pub struct MessageProps {

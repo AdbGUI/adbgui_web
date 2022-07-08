@@ -35,9 +35,7 @@ pub fn app() -> Html {
     let upload = {
         let apk_state = apk_state.clone();
 
-        use_async(async move {
-            post_apk_upload(apk_state.apk.clone()).await
-        })
+        use_async(async move { post_apk_upload(apk_state.apk.clone()).await })
     };
     let _drop_state = {
         let apk_state = apk_state.clone();

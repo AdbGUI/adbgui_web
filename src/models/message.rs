@@ -1,12 +1,12 @@
 #![allow(dead_code)]
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub enum TypeMessage {
     Error,
     Warning,
-    Info
+    Info,
 }
 
 impl Default for TypeMessage {
@@ -24,4 +24,3 @@ impl ToString for TypeMessage {
         }
     }
 }
-

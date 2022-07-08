@@ -1,7 +1,7 @@
-mod app;
-mod models;
-mod components;
 mod api;
+mod app;
+mod components;
+mod models;
 
 use app::App;
 

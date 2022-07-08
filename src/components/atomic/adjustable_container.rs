@@ -8,7 +8,7 @@ use yew_hooks::prelude::*;
 pub enum AdjustableContainerDirection {
     Horizontal,
     Vertical,
-    Both
+    Both,
 }
 
 #[derive(Default, Debug, PartialEq, Properties)]
@@ -26,7 +26,10 @@ impl Default for AdjustableContainerDirection {
 
 #[function_component(AdjustableContainer)]
 pub fn adjustable_container(props: &AdjustableContainerProps) -> Html {
-    let AdjustableContainerProps { direction: _, children } = &props;
+    let AdjustableContainerProps {
+        direction: _,
+        children,
+    } = &props;
 
     let can_drag = use_state(|| false);
     let drag = use_state(|| 0);
@@ -51,7 +54,10 @@ pub fn adjustable_container(props: &AdjustableContainerProps) -> Html {
                 let container = container_ref.cast::<HtmlElement>().unwrap();
                 let offset_height = container.offset_height();
                 let new_height = offset_height - (e.client_y() - (*drag));
-                container.style().set_property("height", format!("{}px", new_height).as_str()).unwrap();
+                container
+                    .style()
+                    .set_property("height", format!("{}px", new_height).as_str())
+                    .unwrap();
                 state.set(e.client_y());
             }
         });

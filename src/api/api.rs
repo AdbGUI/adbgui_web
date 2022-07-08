@@ -60,7 +60,9 @@ pub async fn get_apk_version() -> Result<String, Error> {
 
     let response = Request::get(&endpoint)
         .header("Access-Control-Allow-Origin", "*")
-        .send().await.unwrap();
+        .send()
+        .await
+        .unwrap();
     (response.status() == 200)
         .then(|| "".to_string())
         .ok_or(Error::Empty)?;

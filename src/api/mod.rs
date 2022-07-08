@@ -1,4 +1,4 @@
-pub mod error;
 pub mod api;
+pub mod error;
 
 pub use api::*;
