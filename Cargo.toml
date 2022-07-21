@@ -20,7 +20,7 @@ yew = "0.19"
 yew-hooks = "0.1.56"
 yew-agent = "0.1.0"
 yew-router = "0.16"
-yew_icons = { version = "0.4.1", features = ["FeatherHome"]}
+yew_icons = { version = "0.4.1", features = ["FeatherHome", "OcticonsX24"]}
 
 wasm-bindgen = "0.2.45"
 reqwasm = "0.4.0"
@@ -32,3 +32,4 @@ futures = "0.3.17"
 wasm-bindgen-futures = "0.4.28"
 serde_json = "1.0.73"
 serde = {version = "1.0", features=["derive"]}
+gloo-file = "0.2.3"

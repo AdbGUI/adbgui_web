@@ -1,20 +1,10 @@
-use web_sys::File;
 use yew::prelude::*;
-use yew_hooks::prelude::*;
+use yew_hooks::{use_drop_with_options, UseDropOptions};
 
-use crate::api::post_apk_upload;
 use crate::components::drop_modal::DropModal;
 use crate::components::logcat_shell::LogcatShell;
 use crate::components::sidebar::{Sidebar, SidebarBtnProps};
 use yew_icons::{Icon, IconId};
-
-#[derive(Default)]
-pub struct ApkDropState {
-    pub show_drop_modal: bool,
-    pub uploading: bool,
-    pub apk: Option<File>,
-    pub apk_name: String,
-}
 
 #[function_component(App)]
 pub fn app() -> Html {
@@ -30,60 +20,27 @@ pub fn app() -> Html {
     });
 
     // Drop apk
-    let apk_state = use_state(ApkDropState::default);
     let node = use_node_ref();
-    let upload = {
-        let apk_state = apk_state.clone();
+    let modal_state = use_state(|| false);
 
-        use_async(async move { post_apk_upload(apk_state.apk.clone()).await })
-    };
-    let _drop_state = {
-        let apk_state = apk_state.clone();
-        let over_state = apk_state.clone();
-        let leave_state = apk_state.clone();
-        let upload = upload;
+    {
+        let node = node.clone();
+        let modal_state = modal_state.clone();
 
         use_drop_with_options(
-            node.clone(),
+            node,
             UseDropOptions {
                 ondragenter: Some(Box::new(move |_| {
-                    over_state.set(ApkDropState {
-                        show_drop_modal: true,
-                        apk: None,
-                        apk_name: over_state.apk_name.clone(),
-                        ..*over_state
-                    });
-                })),
-                ondragleave: Some(Box::new(move |_| {
-                    leave_state.set(ApkDropState {
-                        show_drop_modal: false,
-                        apk: None,
-                        apk_name: "".to_string(),
-                        ..*leave_state
-                    });
-                })),
-                onfiles: Some(Box::new(move |files, _data_transfer| {
-                    // Process files or data_transfer
-                    if let Some(apk) = files.iter().find(|f| f.name().ends_with("apk")) {
-                        apk_state.set(ApkDropState {
-                            show_drop_modal: false,
-                            uploading: true,
-                            apk: Some(apk.clone()),
-                            apk_name: apk.name(),
-                        });
-                        upload.run();
-                    } else {
-                        apk_state.set(ApkDropState {
-                            show_drop_modal: false,
-                            uploading: false,
-                            apk: None,
-                            apk_name: "".to_string(),
-                        });
-                    }
+                    modal_state.set(true);
                 })),
                 ..Default::default()
             },
         )
+    };
+
+    let on_close = {
+        let modal_state = modal_state.clone();
+        Callback::from(move |_| modal_state.set(false))
     };
 
     html! {
@@ -100,8 +57,8 @@ pub fn app() -> Html {
                 </div>
                 <LogcatShell />
             </div>
-            if apk_state.show_drop_modal {
-                <DropModal uploading={apk_state.uploading} />
+            if *modal_state {
+                <DropModal on_close={on_close} />
             }
         </main>
     }

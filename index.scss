@@ -29,6 +29,7 @@ main {
 .hidden { display: none !important; }
 .flex { display: flex; }
 .flex-column { flex-flow: column nowrap; }
+.flex-row { flex-flow: row nowrap; }
 .center { align-items: center; justify-content: center; }
 .expand-all { height: 100%; width: 100%; }
 
@@ -49,6 +50,15 @@ main {
     position: fixed;
     width: 100vw;
     z-index: 10;
+
+    .close_button {
+        display: flex;
+        margin-top: 2rem;
+        position: absolute;
+        right: 25%;
+
+        &:hover { cursor: pointer; }
+    }
 }
 
 .error {
@@ -87,6 +97,44 @@ main {
 ///
 /// Components
 ///
+input[type="text"] {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    color: #FAFAFA;
+    font-size: x-large;
+    margin: 10px 0;
+    padding: 5px;
+
+    &:valid {
+        outline: none;
+        border-bottom: 1px solid #7197BA;
+    }
+
+}
+::placeholder, ::-webkit-input-placeholder, ::-moz-placeholder, :-ms-input-placeholder {
+    color: white;
+    opacity: .8;
+}
+.btn {
+    border-radius: 15px;
+    padding: 15px 30px;
+    margin: 0 10px;
+    text-transform: capitalize;
+    font-size: large;
+
+    &:hover { cursor: pointer; }
+    &_primary {
+        // background-color: #7197BA;
+        background-color: royalblue;
+        color: white;
+    }
+    &_secondary {
+        background-color: white;
+        color: royalblue;
+        // color: #7197BA;
+    }
+}
 .sidebar {
     display: flex;
     height: 100%;
